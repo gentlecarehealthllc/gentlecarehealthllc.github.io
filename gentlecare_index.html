@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gentlecare Home Health LLC</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Segoe UI',sans-serif;color:#1a1a2e;background:#f8f6ff;}
+  body::before{content:'';position:fixed;inset:0;background:rgba(0,0,0,0.045);pointer-events:none;z-index:0;}
+  section,nav,.stats,.gov-strip,footer{position:relative;z-index:1;}
+
+  nav{background:#fff;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:14px 40px;box-shadow:0 2px 16px rgba(100,60,180,0.1);border-bottom:3px solid transparent;border-image:linear-gradient(90deg,#6c3fc5,#e05fa0,#f4a024,#3abf8f) 1;}
+  .logo{display:flex;align-items:center;gap:10px;}
+  .logo-icon{width:42px;height:42px;background:linear-gradient(135deg,#6c3fc5,#e05fa0);border-radius:50%;display:flex;align-items:center;justify-content:center;}
+  .logo-icon svg{width:22px;height:22px;fill:white;}
+  .logo-text{font-size:17px;font-weight:700;color:#3b0d8c;line-height:1.1;}
+  .logo-text span{display:block;font-size:11px;font-weight:400;color:#e05fa0;letter-spacing:1px;text-transform:uppercase;}
+  nav ul{list-style:none;display:flex;gap:24px;}
+  nav ul li a{text-decoration:none;color:#3b0d8c;font-size:14px;font-weight:500;transition:color .2s;}
+  nav ul li a:hover{color:#e05fa0;}
+
+  .hero{position:relative;min-height:90vh;display:flex;align-items:center;overflow:hidden;background:linear-gradient(135deg,#0d0020 0%,#2d0b6b 25%,#6c3fc5 55%,#b5367a 80%,#f4a024 100%);}
+  .hero-blobs{position:absolute;inset:0;overflow:hidden;}
+  .blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:0.28;}
+  .blob1{width:400px;height:400px;background:#3abf8f;top:-100px;right:100px;}
+  .blob2{width:300px;height:300px;background:#f4a024;bottom:50px;right:300px;}
+  .blob3{width:250px;height:250px;background:#e05fa0;bottom:-80px;left:200px;}
+  .blob4{width:200px;height:200px;background:#6c3fc5;top:200px;right:0;}
+  .hero-content{position:relative;z-index:2;max-width:640px;padding:70px 60px;}
+  .hero-badge{display:inline-block;background:rgba(255,255,255,0.15);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.3);color:#fff;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:7px 16px;border-radius:20px;margin-bottom:22px;}
+  .hero h1{font-size:50px;font-weight:800;color:#fff;line-height:1.12;margin-bottom:18px;}
+  .hero h1 .c1{color:#ffd97d;}
+  .hero h1 .c2{color:#a8f0d8;}
+  .hero-slogan{font-size:19px;color:#f3c6e0;font-style:italic;margin-bottom:14px;line-height:1.5;}
+  .hero-sub{font-size:15px;color:#d9c4ff;margin-bottom:38px;line-height:1.75;}
+  .hero-btns{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn-primary{background:linear-gradient(135deg,#f4a024,#e05fa0);color:#fff;padding:14px 30px;border-radius:30px;font-weight:700;font-size:15px;text-decoration:none;transition:all .2s;box-shadow:0 4px 18px rgba(224,95,160,0.4);}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(224,95,160,0.5);}
+  .btn-outline{background:transparent;color:#fff;border:2px solid rgba(255,255,255,0.5);padding:13px 30px;border-radius:30px;font-weight:600;font-size:15px;text-decoration:none;transition:all .2s;}
+  .btn-outline:hover{background:rgba(255,255,255,0.12);}
+
+  .gov-strip{background:linear-gradient(90deg,#3b0d8c,#6c3fc5,#b5367a);color:#fff;text-align:center;padding:11px;font-size:13px;letter-spacing:.5px;}
+
+  .stats{background:#fff;padding:40px;display:flex;justify-content:center;gap:0;}
+  .stat{text-align:center;padding:0 50px;border-right:1px solid #f0eaff;}
+  .stat:last-child{border-right:none;}
+  .stat-num{font-size:36px;font-weight:800;}
+  .stat:nth-child(1) .stat-num{color:#6c3fc5;}
+  .stat:nth-child(2) .stat-num{color:#e05fa0;}
+  .stat:nth-child(3) .stat-num{color:#f4a024;}
+  .stat:nth-child(4) .stat-num{color:#3abf8f;}
+  .stat-label{font-size:13px;color:#888;margin-top:4px;}
+
+  .about{display:grid;grid-template-columns:1fr 1fr;gap:60px;padding:80px 60px;align-items:center;background:linear-gradient(135deg,#faf8ff,#fff5fb);}
+  .about-text h2{font-size:34px;font-weight:800;margin-bottom:16px;}
+  .about-text h2 .g1{color:#6c3fc5;}
+  .about-text h2 .g2{color:#e05fa0;}
+  .about-text p{font-size:15px;color:#555;line-height:1.8;margin-bottom:16px;}
+  .leaf-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;}
+  .leaf{font-size:13px;font-weight:600;padding:6px 16px;border-radius:20px;}
+  .leaf1{background:#ede7ff;color:#5e35b1;}
+  .leaf2{background:#fce4ec;color:#c2185b;}
+  .leaf3{background:#fff3e0;color:#e65100;}
+  .leaf4{background:#e0f7f1;color:#00695c;}
+  .about-card{background:#fff;border-radius:20px;padding:34px;box-shadow:0 6px 32px rgba(108,63,197,0.12);border-top:5px solid transparent;border-image:linear-gradient(90deg,#6c3fc5,#e05fa0,#f4a024) 1;position:relative;}
+  .about-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#3abf8f,#6c3fc5);border-radius:0 0 20px 20px;}
+
+  .services{padding:80px 60px;background:#fff;}
+  .section-header{text-align:center;margin-bottom:50px;}
+  .section-header h2{font-size:34px;font-weight:800;margin-bottom:10px;}
+  .section-header p{font-size:15px;color:#777;max-width:520px;margin:0 auto;}
+  .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .service-card{border-radius:16px;padding:28px;transition:all .25s;position:relative;overflow:hidden;}
+  .sc1{background:linear-gradient(135deg,#ede7ff,#f8f4ff);border:1px solid #d1c4e9;}
+  .sc2{background:linear-gradient(135deg,#fce4ec,#fff5f8);border:1px solid #f8bbd0;}
+  .sc3{background:linear-gradient(135deg,#fff8e1,#fffdf4);border:1px solid #ffe082;}
+  .sc4{background:linear-gradient(135deg,#e0f7f1,#f0fdf9);border:1px solid #b2dfdb;}
+  .sc5{background:linear-gradient(135deg,#e3f2fd,#f0f8ff);border:1px solid #bbdefb;}
+  .sc6{background:linear-gradient(135deg,#fbe9e7,#fff8f7);border:1px solid #ffccbc;}
+  .service-card:hover{transform:translateY(-5px);box-shadow:0 10px 32px rgba(0,0,0,0.1);}
+  .svc-icon{width:50px;height:50px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+  .ic1{background:linear-gradient(135deg,#6c3fc5,#9c6fe0);}
+  .ic2{background:linear-gradient(135deg,#e05fa0,#f48bc1);}
+  .ic3{background:linear-gradient(135deg,#f4a024,#ffc85a);}
+  .ic4{background:linear-gradient(135deg,#3abf8f,#5ddbb0);}
+  .ic5{background:linear-gradient(135deg,#1e88e5,#64b5f6);}
+  .ic6{background:linear-gradient(135deg,#e64a19,#ff8a65);}
+  .svc-icon svg{width:24px;height:24px;fill:white;}
+  .service-card h3{font-size:16px;font-weight:700;margin-bottom:8px;color:#1a1a2e;}
+  .service-card p{font-size:13px;color:#555;line-height:1.65;}
+
+  .team{padding:80px 60px;background:linear-gradient(135deg,#f8f6ff,#fff5fb);}
+  .ceo-card{background:#fff;border-radius:24px;max-width:500px;margin:0 auto;padding:44px;text-align:center;box-shadow:0 8px 36px rgba(108,63,197,0.13);border:1px solid #ede7ff;position:relative;overflow:hidden;}
+  .ceo-card::before{content:'';position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#6c3fc5,#e05fa0,#f4a024,#3abf8f);}
+  .ceo-avatar{width:90px;height:90px;background:linear-gradient(135deg,#6c3fc5,#e05fa0);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:30px;font-weight:800;color:white;box-shadow:0 4px 20px rgba(108,63,197,0.3);}
+  .ceo-card h3{font-size:24px;font-weight:800;color:#3b0d8c;}
+  .ceo-card .role{background:linear-gradient(90deg,#6c3fc5,#e05fa0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-size:14px;margin-top:6px;font-weight:600;}
+  .ceo-card p{font-size:14px;color:#555;margin-top:16px;line-height:1.75;}
+
+  .contact-form-section{padding:80px 60px;background:#fff;}
+  .contact-form-section h2{font-size:34px;font-weight:800;text-align:center;margin-bottom:10px;background:linear-gradient(90deg,#6c3fc5,#e05fa0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+  .contact-form-section>p{text-align:center;color:#777;font-size:15px;margin-bottom:44px;}
+  .form-wrap{max-width:680px;margin:0 auto;background:linear-gradient(135deg,#faf8ff,#fff5fb);border-radius:24px;padding:44px;box-shadow:0 6px 32px rgba(108,63,197,0.1);border:1px solid #ede7ff;}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px;}
+  .form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:18px;}
+  .form-group label{font-size:13px;font-weight:600;color:#3b0d8c;}
+  .form-group input,.form-group textarea,.form-group select{padding:12px 16px;border:2px solid #e8e0ff;border-radius:12px;font-size:14px;color:#1a1a2e;background:#fff;outline:none;transition:border .2s;font-family:inherit;}
+  .form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:#6c3fc5;}
+  .form-group textarea{resize:vertical;min-height:120px;}
+  .form-submit{width:100%;padding:15px;background:linear-gradient(135deg,#6c3fc5,#e05fa0);color:#fff;border:none;border-radius:30px;font-size:16px;font-weight:700;cursor:pointer;transition:all .2s;box-shadow:0 4px 18px rgba(108,63,197,0.3);}
+  .form-submit:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(224,95,160,0.4);}
+  .form-success{display:none;text-align:center;padding:20px;background:#e0f7f1;border-radius:14px;color:#00695c;font-weight:600;font-size:15px;margin-top:16px;}
+
+  .map-section{padding:80px 60px;background:linear-gradient(135deg,#faf8ff,#fff5fb);}
+  .map-section h2{font-size:34px;font-weight:800;text-align:center;margin-bottom:10px;background:linear-gradient(90deg,#f4a024,#3abf8f);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+  .map-section>p{text-align:center;color:#777;font-size:15px;margin-bottom:40px;}
+  .map-wrap{border-radius:24px;overflow:hidden;box-shadow:0 8px 36px rgba(108,63,197,0.15);border:4px solid #fff;max-width:900px;margin:0 auto;}
+  .map-wrap iframe{width:100%;height:420px;border:none;display:block;}
+
+  .contact{padding:80px 60px;background:linear-gradient(135deg,#0a0015 0%,#2d0b6b 30%,#6c3fc5 60%,#b5367a 80%,#f4a024 100%);color:#fff;text-align:center;position:relative;overflow:hidden;}
+  .contact::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 50%,rgba(58,191,143,0.3) 0%,transparent 60%);}
+  .contact h2{font-size:36px;font-weight:800;margin-bottom:12px;position:relative;}
+  .contact>p{font-size:15px;color:#e0c8ff;margin-bottom:44px;position:relative;}
+  .contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:740px;margin:0 auto 44px;position:relative;}
+  .contact-item{background:rgba(255,255,255,0.12);backdrop-filter:blur(10px);border-radius:16px;padding:26px;border:1px solid rgba(255,255,255,0.2);transition:all .2s;}
+  .contact-item:hover{background:rgba(255,255,255,0.18);}
+  .contact-item svg{width:28px;height:28px;fill:#ffd97d;margin-bottom:10px;}
+  .contact-item h4{font-size:12px;color:#d9c4ff;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px;}
+  .contact-item p{font-size:14px;color:#fff;font-weight:600;}
+  .cta-btn{display:inline-block;background:linear-gradient(135deg,#f4a024,#e05fa0);color:#fff;padding:16px 44px;border-radius:30px;font-weight:700;text-decoration:none;font-size:16px;box-shadow:0 6px 24px rgba(224,95,160,0.4);transition:all .2s;position:relative;}
+  .cta-btn:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(244,160,36,0.4);}
+
+  .social-bar{display:flex;justify-content:center;gap:16px;margin-top:36px;position:relative;flex-wrap:wrap;}
+  .social-btn{display:flex;align-items:center;gap:8px;padding:11px 22px;border-radius:30px;font-size:14px;font-weight:600;text-decoration:none;transition:all .2s;border:2px solid rgba(255,255,255,0.25);color:#fff;backdrop-filter:blur(6px);background:rgba(255,255,255,0.1);}
+  .social-btn:hover{background:rgba(255,255,255,0.22);transform:translateY(-2px);}
+  .social-btn svg{width:18px;height:18px;fill:currentColor;}
+
+  footer{background:#0d0020;color:#b39ddb;text-align:center;padding:26px;font-size:13px;}
+  footer strong{color:#fff;}
+  footer span{font-size:12px;opacity:0.5;display:block;margin-top:6px;}
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <div class="logo">
+    <div class="logo-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg>
+    </div>
+    <div class="logo-text">Gentlecare Home Health LLC
+      <span>Registered · Bureau of Labor Statistics</span>
+    </div>
+  </div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#team">Our Team</a></li>
+    <li><a href="#reach-us">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- GOV STRIP -->
+<div class="gov-strip">
+  ✔ <strong>Officially Registered</strong> with the U.S. Bureau of Labor Statistics &nbsp;·&nbsp; Licensed &amp; Insured &nbsp;·&nbsp; Canal Winchester, Ohio
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-blobs">
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    <div class="blob blob3"></div>
+    <div class="blob blob4"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">Home Health Care · Ohio</div>
+    <h1>Care That Feels<br>Like <span class="c1">Home</span>, <span class="c2">Always</span></h1>
+    <p class="hero-slogan">"Where Compassion Meets Care — Right at Your Door."</p>
+    <p class="hero-sub">Gentlecare Home Health LLC delivers professional, personalized in-home health aide services so your loved ones live comfortably, safely, and with dignity.</p>
+    <div class="hero-btns">
+      <a href="#reach-us" class="btn-primary">Get Started Today</a>
+      <a href="#services" class="btn-outline">Explore Services</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="stat-num">24/7</div><div class="stat-label">Care Availability</div></div>
+  <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Certified HHA Staff</div></div>
+  <div class="stat"><div class="stat-num">1st</div><div class="stat-label">Priority: Your Family</div></div>
+  <div class="stat"><div class="stat-num">Gov.</div><div class="stat-label">Registered &amp; Insured</div></div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-text">
+    <h2><span class="g1">Who</span> <span class="g2">We Are</span></h2>
+    <p>Gentlecare Home Health LLC is a trusted home health care agency based in Canal Winchester, Ohio — registered with the Bureau of Labor Statistics and committed to delivering the highest standard of compassionate in-home care.</p>
+    <p>Our mission is to provide clients and their families with the professional support they need, in the comfort and familiarity of their own homes. Every person deserves to age and heal with dignity.</p>
+    <div class="leaf-row">
+      <span class="leaf leaf1">🌿 Compassionate</span>
+      <span class="leaf leaf2">❤ Family-First</span>
+      <span class="leaf leaf3">✔ Certified</span>
+      <span class="leaf leaf4">🏠 In-Home</span>
+    </div>
+  </div>
+  <div>
+    <div class="about-card">
+      <h3 style="font-size:20px;font-weight:700;color:#3b0d8c;margin-bottom:14px;">Our Promise to You</h3>
+      <p style="font-size:14px;color:#555;line-height:1.85;">We treat every client as family. Our Home Health Aides (HHAs) are carefully selected, trained, and supervised to ensure your loved ones receive respectful, reliable, and professional care — every single day.</p>
+      <div style="margin-top:20px;padding:14px 18px;background:linear-gradient(135deg,#ede7ff,#fce4ec);border-radius:12px;font-size:14px;font-weight:600;color:#6c3fc5;font-style:italic;">
+        "Your comfort. Our calling."
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-header">
+    <h2 style="background:linear-gradient(90deg,#6c3fc5,#e05fa0,#f4a024);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Our Key Services</h2>
+    <p>A full range of in-home care services, tailored to meet each client's unique needs.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card sc1">
+      <div class="svc-icon ic1"><svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg></div>
+      <h3>Personal Care</h3>
+      <p>Bathing, dressing, grooming, and hygiene assistance delivered with warmth and respect for privacy and dignity.</p>
+    </div>
+    <div class="service-card sc2">
+      <div class="svc-icon ic2"><svg viewBox="0 0 24 24"><path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/></svg></div>
+      <h3>Meal Preparation</h3>
+      <p>Nutritious, home-cooked meals planned and prepared according to dietary needs and personal preferences.</p>
+    </div>
+    <div class="service-card sc3">
+      <div class="svc-icon ic3"><svg viewBox="0 0 24 24"><path d="M13.49 5.48c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-3.6 13.9l1-4.4 2.1 2v6h2v-7.5l-2.1-2 .6-3c1.3 1.5 3.3 2.5 5.5 2.5v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1l-5.2 2.2v4.7h2v-3.4l1.8-.7-1.6 8.1-4.9-1-.4 2 7 1.4z"/></svg></div>
+      <h3>Mobility Support</h3>
+      <p>Safe assistance with moving around the home, transferring from bed to wheelchair, and fall prevention.</p>
+    </div>
+    <div class="service-card sc4">
+      <div class="svc-icon ic4"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg></div>
+      <h3>Home Assistance</h3>
+      <p>Light housekeeping, laundry, errands, and daily tasks to keep the home clean, safe, and organized.</p>
+    </div>
+    <div class="service-card sc5">
+      <div class="svc-icon ic5"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg></div>
+      <h3>Toileting Assistance</h3>
+      <p>Respectful and professional help with toileting routines, incontinence care, and related hygiene needs.</p>
+    </div>
+    <div class="service-card sc6">
+      <div class="svc-icon ic6"><svg viewBox="0 0 24 24"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg></div>
+      <h3>Companionship &amp; Daily Activities</h3>
+      <p>Emotional support, conversation, light exercise, and engaging activities to promote mental and social well-being.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team" id="team">
+  <div class="section-header">
+    <h2 style="background:linear-gradient(90deg,#6c3fc5,#e05fa0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Meet Our Leadership</h2>
+    <p>Led by a dedicated professional committed to quality care and community health.</p>
+  </div>
+  <div class="ceo-card">
+    <div class="ceo-avatar">CEO</div>
+    <h3>Our Founder &amp; CEO</h3>
+    <div class="role">Chief Executive Officer — Gentlecare Home Health LLC</div>
+    <p>Gentlecare Home Health LLC was founded with a heartfelt commitment to families across Canal Winchester and greater Ohio. Our CEO built this company on one belief: <em>every person deserves to feel safe, valued, and cared for — right at home.</em> Under his leadership, our team strives every day to make that belief a lived reality.</p>
+  </div>
+</section>
+
+<!-- CONTACT FORM -->
+<section class="contact-form-section" id="reach-us">
+  <h2>Send Us a Message 💬</h2>
+  <p>Have a question or need care for a loved one? We'd love to hear from you!</p>
+  <div class="form-wrap">
+    <div class="form-row">
+      <div class="form-group"><label>First Name</label><input type="text" placeholder="e.g. Jane"></div>
+      <div class="form-group"><label>Last Name</label><input type="text" placeholder="e.g. Smith"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="+1 (614) ..."></div>
+      <div class="form-group"><label>Email Address</label><input type="email" placeholder="you@email.com"></div>
+    </div>
+    <div class="form-group">
+      <label>Service Needed</label>
+      <select>
+        <option value="">— Select a service —</option>
+        <option>Personal Care</option>
+        <option>Meal Preparation</option>
+        <option>Mobility Support</option>
+        <option>Home Assistance</option>
+        <option>Toileting Assistance</option>
+        <option>Companionship &amp; Daily Activities</option>
+        <option>Other / General Inquiry</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Your Message</label>
+      <textarea placeholder="Tell us a little about your needs and we'll get back to you promptly..."></textarea>
+    </div>
+    <button class="form-submit" onclick="document.getElementById('successMsg').style.display='block';this.innerText='✅ Message Sent!';this.style.background='linear-gradient(135deg,#3abf8f,#1e88e5)';">
+      Send Message 💌
+    </button>
+    <div class="form-success" id="successMsg">🎉 Thank you! We've received your message and will get back to you shortly.</div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section class="map-section" id="map">
+  <h2>Find Us 📍</h2>
+  <p>We proudly serve Canal Winchester and the greater Central Ohio area.</p>
+  <div class="map-wrap">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24464.07623788!2d-82.82820!3d39.84150!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8838707b3b0b1a1b%3A0x4e0f8b8d2e1f1a1a!2sCanal%20Winchester%2C%20OH%2043110!5e0!3m2!1sen!2sus!4v1714600000000"
+      width="100%" height="420" style="border:0;" allowfullscreen="" loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</section>
+
+<!-- CONTACT INFO -->
+<section class="contact">
+  <h2>Get in Touch 🌟</h2>
+  <p>We're here for you — anytime, any day. Reach out and let us help your family.</p>
+  <div class="contact-grid">
+    <div class="contact-item">
+      <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+      <h4>Phone</h4>
+      <p>+1 (614) 772-2876</p>
+    </div>
+    <div class="contact-item">
+      <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+      <h4>Address</h4>
+      <p>Canal Winchester, Ohio, USA</p>
+    </div>
+    <div class="contact-item">
+      <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 4l5 2.18V11c0 3.5-2.33 6.79-5 7.93-2.67-1.14-5-4.43-5-7.93V7.18L12 5z"/></svg>
+      <h4>Registration</h4>
+      <p>Bureau of Labor Statistics</p>
+    </div>
+  </div>
+  <a href="tel:+16147722876" class="cta-btn">📞 Call Us Now</a>
+
+  <!-- SOCIAL MEDIA -->
+  <div class="social-bar">
+    <a href="https://facebook.com/YOUR_PAGE" target="_blank" class="social-btn">
+      <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg> Facebook
+    </a>
+    <a href="https://instagram.com/YOUR_HANDLE" target="_blank" class="social-btn">
+      <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="white" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="white" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="white"/></svg> Instagram
+    </a>
+    <a href="https://linkedin.com/company/YOUR_COMPANY" target="_blank" class="social-btn">
+      <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg> LinkedIn
+    </a>
+    <a href="https://twitter.com/YOUR_HANDLE" target="_blank" class="social-btn">
+      <svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg> Twitter / X
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <strong>Gentlecare Home Health LLC</strong> &nbsp;·&nbsp; Canal Winchester, Ohio &nbsp;·&nbsp; +1 (614) 772-2876 &nbsp;·&nbsp; Registered with the Bureau of Labor Statistics
+  <span>© 2026 Gentlecare Home Health LLC. All rights reserved.</span>
+</footer>
+
+</body>
+</html>
